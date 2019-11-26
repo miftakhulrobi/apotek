@@ -1,0 +1,1 @@
+<link rel="stylesheet" href="<?= base_url('admin') ?>/css/datatables.min.css">
