@@ -9,7 +9,9 @@ class Transaction_p extends CI_Controller
         parent::__construct();
         checklogin();
         checkpegawai();
-        $this->load->model(['obat_m', 'transaction_m']);
+        $this->load->model('transaction_m');
+        $this->load->model('keuangan_m');
+        $this->load->model('obat_m');
     }
 
     public function index()
@@ -54,10 +56,42 @@ class Transaction_p extends CI_Controller
         echo json_encode($data);
     }
 
-    public function getobatid($id)
+    public function newtransaksi()
     {
-        $where = ['obat_id' => $id];
-        $obat = $this->obat_m->getwhere('obats', $where)->row();
-        echo json_encode($obat);
+        $nonota = $this->transaction_m->nonota();
+        $data = [
+            'transaction_id' => $nonota,
+            'nota' => 'ARH/' . $nonota . '/KSR/' . strtoupper($this->session->userdata('name')),
+            'money' => $this->input->post('pricetotal'),
+            'pricemoney' => $this->input->post('pricemoney'),
+            'pricebayar' => $this->input->post('pricebayar'),
+            'pricediscount' => $this->input->post('pricediscount'),
+            'pricekembalian' => $this->input->post('pricekembalian'),
+            'created_at' => date('ymd'),
+        ];
+        $this->transaction_m->store('transaksi', $data);
+
+        $saldo = $this->keuangan_m->getwhere('saldo', ['saldo_id' => 1])->row();
+        $newsaldo = [
+            'saldos' => $saldo->saldos += $this->input->post('pricetotal')
+        ];
+        $wheresaldo = ['saldo_id' => 1];
+        $this->keuangan_m->update('saldo', $newsaldo, $wheresaldo);
+
+        $process = $this->transaction_m->get('process')->result();
+        $transaksi = $this->transaction_m->getwhere('transaksi', $data)->row();
+        foreach ($process as $p) {
+            $insert = [
+                'transaction_id' => $transaksi->transaction_id,
+                'product' => $p->product,
+                'price' => $p->price,
+                'qty' => $p->qty,
+                'total' => $p->total
+            ];
+            $this->transaction_m->store('logprocess', $insert);
+        }
+        $this->transaction_m->truncate('process');
+
+        echo json_encode($transaksi);
     }
 }

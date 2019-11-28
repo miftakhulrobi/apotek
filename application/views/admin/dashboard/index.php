@@ -51,7 +51,7 @@
               <div class="float-right">
                 <p class="mb-0 text-right">Pendptn Kemarin</p>
                 <div class="fluid-container">
-                  <h3 class="font-weight-medium text-right mb-0"><?= $pkemarin ?></h3>
+                  <h3 class="font-weight-medium text-right mb-0"><?= number_format($pkemarin) ?></h3>
                 </div>
               </div>
             </div>

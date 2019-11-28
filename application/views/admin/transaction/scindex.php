@@ -50,52 +50,12 @@
         return prefix == undefined ? rupiah : (rupiah ? 'Rp' + rupiah : '');
     }
 
-
-    function Process(item) {
-        this.product = item.product;
-        this.harga = item.harga;
-        this.qty = item.qty;
-        this.total = item.total;
-
-        this.nota = item.nota;
-        this.money = item.money;
-
-        this.insert = function() {
-            $.ajax({
-                url: '<?= base_url('transaction_a/inserttoprocess') ?>',
-                type: 'POST',
-                data: {
-                    product: this.product,
-                    price: this.harga,
-                    qty: this.qty,
-                    total: this.total
-                },
-                dataType: 'json',
-                success: function() {
-
-                }
-            })
-        }
-    }
-
     $('.btn-cari-product').click(function() {
         $('[name="total"]').val('');
         $('[name="qty"]').val('');
 
         $('.badge-transaksi-baru').css('opacity', 1).addClass('badge-transaksi-baru-animation');
     })
-
-    // if ($('[name="total"]').val() == '') {
-    //     $('.simpan-item').attr('disabled', 'disabled');
-    // } else {
-    //     $('.simpan-item').removeAttr('disabled');
-    // }
-
-    // if ($('[name="bayar"]').val() == '') {
-    //     $('.btn-print-transaksi').attr('disabled', 'disabled');
-    // } else {
-    //     $('.btn-print-transaksi').removeAttr('disabled');
-    // }
 
     $('.batal-item').click(function() {
         $('[name="obatname"]').val('');
@@ -180,8 +140,20 @@
             $('[name="pricetotal"]').val(newtotal);
         }
 
-        let insertTable = new Process(item);
-        insertTable.insert();
+        $.ajax({
+            url: '<?= base_url('transaction_a/inserttoprocess') ?>',
+            type: 'POST',
+            data: {
+                product: item.product,
+                price: item.harga,
+                qty: item.qty,
+                total: item.total
+            },
+            dataType: 'json',
+            success: function() {
+
+            }
+        })
     })
 
     $('[name="bayar"]').keyup(function() {
@@ -221,16 +193,6 @@
         $('[name="pricediscount"]').val(totaldiscount);
     })
 
-    // $('.btn-print-transaksi').click(function() {
-    //     const item = {
-    //         nota: 'ARH ' + new Date(),
-    //         money: document.querySelector('.total-belanja').getAttribute('data-totalbelanja'),
-    //     }
-
-    //     let transaction = new Process(item);
-    //     transaction.inserttransaction();
-    // })
-
     $('.btn-reset-transaksi').click(function() {
         swal({
             title: 'Anda Yakin?',
@@ -268,5 +230,33 @@
                 });
             }
         });
+    })
+
+    $('.btn-simpan-transaksi').click(function() {
+        let pricemoney = $('[name="pricemoney"]').val();
+        let pricetotal = $('[name="pricetotal"]').val();
+        let pricebayar = $('[name="pricebayar"]').val();
+        let pricediscount = $('[name="pricediscount"]').val();
+        let pricekembalian = $('[name="pricekembalian"]').val();
+
+        $.ajax({
+            url: '<?= base_url('transaction_a/newtransaksi') ?>',
+            type: 'POST',
+            data: {
+                pricemoney: pricemoney,
+                pricetotal: pricetotal,
+                pricebayar: pricebayar,
+                pricediscount: pricediscount,
+                pricekembalian: pricekembalian
+            },
+            dataType: 'json',
+            success: function(data) {
+                $('.btn-print-transaksi').attr('href', '<?= base_url('pdf/cetaktransaksi/') ?>' + data.transaction_id)
+                toastr.success("Transaksi baru berhasil ditambahkan!");
+            }
+        })
+        $('.btn-simpan-transaksi').css('display', 'none');
+        $('.btn-reset-transaksi').css('display', 'none');
+        $('.btn-print-transaksi').css('display', 'inline');
     })
 </script>

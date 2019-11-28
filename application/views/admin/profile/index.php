@@ -16,7 +16,7 @@
                         <hr>
                         <h3 class="text-center text-primary"><?= $this->auths->user()->name ?></h3>
                         <p class="text-muted text-center mb-0">
-                            Jabatan : <?= $this->auths->user()->email ?>
+                            <?= $this->auths->user()->email ?>
                         </p>
                         <p class="text-center mb-0">
                             Jabatan : <?= $this->auths->user()->role ?>

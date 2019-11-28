@@ -56,7 +56,7 @@
 </div>
 
 <div class="modal fade" id="create" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-md" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title text-warning" id="createLabel">Pilih Kategori</h5>
@@ -65,14 +65,36 @@
                 </button>
             </div>
             <div class="modal-body">
-                <ul class="list-arrow">
-                    <div class="list-box">
-                        <?php foreach ($kategori as $k) : ?>
-                            <li><a href="#" class="pilih-kategori" data-kategori_id="<?= $k->kategori_id ?>" data-kategoriname="<?= $k->kategoriname ?>"><?= $k->kategoriname ?></a></li>
+                <table class="table table-striped table-hover" id="data-kategori">
+                    <thead class="bg-warning text-white">
+                        <tr>
+                            <th>
+                                #
+                            </th>
+                            <th>
+                                Nama Kategori
+                            </th>
+                            <th>
+                                Total Product
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php $no = 1;
+                        foreach ($kategori as $k) : ?>
+                            <tr>
+                                <td><?= $no++ ?></td>
+                                <td>
+                                    <a href="#" class="pilih-kategori" data-kategori_id="<?= $k->kategori_id ?>" data-kategoriname="<?= $k->kategoriname ?>">
+                                        <?= $k->kategoriname ?>
+                                    </a>
+                                </td>
+                                <td><?= $k->cobat ?></td>
+                            </tr>
                         <?php endforeach ?>
-                    </div>
+                    </tbody>
+                </table>
 
-                </ul>
             </div>
             <div class="modal-footer">
 

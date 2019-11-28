@@ -9,7 +9,7 @@ class Keuangan_a extends CI_Controller
         parent::__construct();
         checklogin();
         checkadmin();
-        $this->load->model(['kategori_m', 'keuangan_m']);
+        $this->load->model(['kategori_m', 'keuangan_m', 'transaction_m']);
     }
 
     public function index()

@@ -111,12 +111,12 @@ $table2 = '<table style="padding: 5px;">
                 <tr>
                     <td style="width: 500px;">HARGA JUAL</td>
                     <td style="width: 30px;">:</td>
-                    <td style="width: 80px;">' . number_format($pricemoney) . '</td>
+                    <td style="width: 80px;">' . number_format($transaksi->pricemoney) . '</td>
                 </tr>
                 <tr>
                     <td style="width: 500px;">DISCOUNT</td>
                     <td style="width: 30px;">:</td>
-                    <td style="width: 80px;">' . number_format($pricediscount) . '</td>
+                    <td style="width: 80px;">' . number_format($transaksi->pricediscount) . '</td>
                 </tr>
             </table>';
 
@@ -128,17 +128,17 @@ $table3 = '<table style="padding: 5px;">
                 <tr>
                     <td style="width: 500px;">TOTAL</td>
                     <td style="width: 30px;">:</td>
-                    <td style="width: 80px;">' . number_format($pricetotal) . '</td>
+                    <td style="width: 80px;">' . number_format($transaksi->money) . '</td>
                 </tr>
                 <tr>
                     <td style="width: 500px;">TUNAI</td>
                     <td style="width: 30px;">:</td>
-                    <td style="width: 80px;">' . number_format($pricebayar) . '</td>
+                    <td style="width: 80px;">' . number_format($transaksi->pricebayar) . '</td>
                 </tr>
                 <tr>
                     <td style="width: 500px;">KEMBALI</td>
                     <td style="width: 30px;">:</td>
-                    <td style="width: 80px;">' . number_format($pricekembalian) . '</td>
+                    <td style="width: 80px;">' . number_format($transaksi->pricekembalian) . '</td>
                 </tr>
             </table>';
 

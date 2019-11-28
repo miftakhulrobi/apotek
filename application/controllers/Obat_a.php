@@ -30,6 +30,7 @@ class Obat_a extends CI_Controller
         $data['kategori'] = $this->kategori_m->getall('kategoris')->result();
 
         $this->load->view('admin/layout/header');
+        $this->load->view('admin/master/obat/csscreate');
         $this->load->view('admin/master/obat/create', $data);
         $this->load->view('admin/layout/footer');
         $this->load->view('admin/master/obat/sccreate');

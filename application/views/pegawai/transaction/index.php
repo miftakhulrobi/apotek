@@ -109,10 +109,9 @@
                 <div class="card card-table-data">
                     <div class="card-body">
                         <div class="form-group">
-                            <form action="<?= base_url('pdf/cetaktransaksi') ?>" method="POST">
-                                <div class="input-box">
-                                    <input type="text" name="bayar" class="form-control" placeholder="Bayar" required>
-                                </div>
+                            <div class="input-box">
+                                <input type="text" name="bayar" class="form-control" placeholder="Bayar" required>
+                            </div>
                         </div>
                         <div class="form-group">
                             <div class="input-box">
@@ -126,9 +125,9 @@
                             <input type="hidden" name="pricediscount">
                             <input type="hidden" name="pricebayar" required>
                             <input type="hidden" name="pricekembalian">
-                            <button type="submit" class="btn btn-success btn-sm btn-hover btn-print-transaksi">Cetak Transaksi</button>
+                            <button type="button" class="btn btn-success btn-sm btn-hover btn-simpan-transaksi">Simpan Transaksi</button>
                             <button type="button" class="btn btn-danger btn-sm btn-hover btn-reset-transaksi">Reset</button>
-                            </form>
+                            <a target="_blank" class="btn btn-success btn-sm btn-hover btn-print-transaksi" style="display:none">Cetak Transaksi</a>
                         </div>
 
                     </div>
