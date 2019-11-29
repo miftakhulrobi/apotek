@@ -5,6 +5,8 @@
         $('#data-obat').DataTable();
     });
 
+    $('.badge-transaksi-baru').css('opacity', 1).addClass('badge-transaksi-baru-animation');
+
     function Obat(data) {
         this.biji = data.biji;
         this.kaplet = data.kaplet;
@@ -53,8 +55,6 @@
     $('.btn-cari-product').click(function() {
         $('[name="total"]').val('');
         $('[name="qty"]').val('');
-
-        $('.badge-transaksi-baru').css('opacity', 1).addClass('badge-transaksi-baru-animation');
     })
 
     $('.batal-item').click(function() {

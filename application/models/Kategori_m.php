@@ -24,4 +24,10 @@ class Kategori_m extends CI_Model
         $this->db->where($where);
         return $this->db->update($table, $data);
     }
+
+    public function destroy($table, $where)
+    {
+        $this->db->where($where);
+        return $this->db->delete($table);
+    }
 }

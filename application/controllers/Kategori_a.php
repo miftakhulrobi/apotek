@@ -41,4 +41,12 @@ class Kategori_a extends CI_Controller
         $this->session->set_flashdata('success', 'Data berhasil di perbarui!');
         redirect('kategori_a');
     }
+
+    public function destroy($id)
+    {
+        $this->kategori_m->destroy('kategoris', ['kategori_id' => $id]);
+
+        $this->session->set_flashdata('success', 'Data berhasil di hapus!');
+        redirect('kategori_a');
+    }
 }

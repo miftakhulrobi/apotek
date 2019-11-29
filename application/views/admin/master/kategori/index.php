@@ -42,7 +42,9 @@
                                             </td>
                                             <td>
                                                 <a href="#" data-toggle="modal" data-target="#edit" data-id="<?= $k->kategori_id ?>" data-kategoriname="<?= $k->kategoriname ?>" class="btn btn-warning btn-sm btn-hover edit">Edit</a>
-                                                <a href="" class="btn btn-danger btn-sm btn-hover">Hapus</a>
+                                                <?php if ($k->cobat == 0) : ?>
+                                                    <a href="#" class="btn btn-danger btn-sm btn-hover hapus-kategori" data-id="<?= $k->kategori_id ?>">Hapus</a>
+                                                <?php endif ?>
                                             </td>
                                         </tr>
                                     <?php endforeach ?>
