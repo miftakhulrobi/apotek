@@ -67,6 +67,16 @@
             border-radius: 90%;
         }
 
+        .avatar-user-login {
+            width: 200px;
+            height: 200px;
+            border-radius: 90%;
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: center;
+            border: 1px solid lime;
+        }
+
         @keyframes badge-transaksi-baru-animation {
             0% {
                 opacity: 0;

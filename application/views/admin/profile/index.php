@@ -6,10 +6,13 @@
                     <div class="card-body">
                         <div class="clearfix">
                             <div class="text-center">
+
                                 <?php if (!$this->auths->user()->avatar) : ?>
                                     <img src="<?= base_url('admin') ?>/images/faces/admin.jpg" alt="" class="img-thumbnail img-responsive img-avatar-user">
                                 <?php else : ?>
-                                    <img src="<?= base_url('admin') ?>/images/user/<?= $this->auths->user()->avatar ?>" alt="" class="img-thumbnail img-responsive img-avatar-user">
+                                    <center>
+                                        <div class="avatar-user-login" style="background-image: url(<?= base_url('admin') ?>/images/user/<?= $this->auths->user()->avatar ?>)" width="200"></div>
+                                    </center>
                                 <?php endif ?>
                             </div>
                         </div>

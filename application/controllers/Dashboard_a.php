@@ -15,6 +15,7 @@ class Dashboard_a extends CI_Controller
     public function index()
     {
         $date = date('ymd');
+        $prevdate = date('ymd', strtotime('-1month'));
 
         $hari0 = strtotime($date);
         $hari1 = strtotime($date);
@@ -46,6 +47,9 @@ class Dashboard_a extends CI_Controller
         $data['pkemarin'] = $phari1;
         $data['pseminggu'] = $phari0 + $phari1 + $phari2 + $phari3 + $phari4 + $phari5 + $phari6;
         $data['tglkemarin'] = date('d M Y', strtotime("-1 day"));
+
+        $data['psebulanini'] = $this->db->query("SELECT sum(money) as money FROM transaksi GROUP BY created_at = MONTH($date), created_at = YEAR($date)")->row()->money;
+        $data['psebulankemarin'] = $this->db->query("SELECT sum(money) as money FROM transaksi GROUP BY created_at = MONTH($prevdate), created_at = YEAR($prevdate)")->row()->money;
 
         $this->load->view('admin/layout/header');
         $this->load->view('admin/dashboard/index', $data);
